@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://ns1</value>
+	</property>
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/opt/cdh5.3.6/hadoop-2.5.0-cdh5.3.6/tmp</value>
+	</property>
+	<property>
+		<name>ha.zookeeper.quorum</name>
+		<value>bigdata-cdh01.ibeifeng.com:2181,bigdata-cdh02.ibeifeng.com:2181,bigdata-cdh03.ibeifeng.com:2181</value>
+	</property>
+	<property>
+		<name>fs.trash.interval</name>
+		<value>420</value>
+	</property>
+</configuration>

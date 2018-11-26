@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.zkh</groupId>
+	<artifactId>hadoop2.5.0-demo</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<!-- 版本设置 start -->
+	<properties>
+		<hadoop.version>2.5.0</hadoop.version>
+		<hbase.version>0.98.6-hadoop2</hbase.version>
+		<hive.version>0.13.1</hive.version>
+		<zookeeper.version>3.4.11</zookeeper.version>
+		<kafka.version>0.8.2.1</kafka.version>
+	</properties>
+	<!-- 版本设置 end -->
+	<!-- jar包依赖 start -->
+	<dependencies>
+		<!-- hadoo start -->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-hdfs</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		<!-- hadoop end -->
+		<!-- hbase start -->
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-client</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-server</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		<!-- hbase end -->
+		<!-- hive  start-->
+		 <dependency>
+	    	<groupId>org.apache.hive</groupId>
+	    	<artifactId>hive-exec</artifactId>
+	    	<version>${hive.version}</version>
+	    </dependency>
+	    <!-- hive  end-->
+	    <!-- zookeeper  start-->
+		<dependency>
+	        <groupId>org.apache.zookeeper</groupId>
+	        <artifactId>zookeeper</artifactId>
+	        <version>${zookeeper.version}</version>
+	    </dependency>
+	    <!--分布式锁 封装jar start  -->
+	    <dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-recipes</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<!--分布式锁 封装jar end  -->
+	    <!-- zookeeper  end-->
+	    <!-- kafka start -->
+	    <dependency>
+		    <groupId>org.apache.kafka</groupId>
+		    <artifactId>kafka-clients</artifactId>
+		    <version>${kafka.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.10</artifactId>
+			<version>${kafka.version}</version>
+		</dependency> 
+	    <!-- kafka end -->
+	</dependencies>
+	<!-- jar包依赖 end -->
+</project>

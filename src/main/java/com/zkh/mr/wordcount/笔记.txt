@@ -1,0 +1,28 @@
+1. 修改pom文件，添加hadoop和hbase依赖
+2. 添加LoggerUtil类,中间设计到EventLogConstant常量类和TimeUtil工具类
+  LoggerUtil主要作用就是解析日志，返回一个map对象
+  EventLogConstants主要作用就是描述hbase的event_logs表的信息(表名，列簇名，列名)以及日志收集的日志中的数据参数name。其实列名和name是一样的。
+  TimeUtil主要作用解析服务器时间以及定义rowkey中的timestamp时间戳格式。
+3. 编写mapper类和runner类
+4. 添加环境变量文件，core-site.xml hbase-site.xml log4j.properties  根据不同的运行情况，修改源码将修改后的源码放到代码中。
+5. 添加pom编译代码，并进行测试
+	本地运行测试： 需要注意的就是windows环境可能会导致出现access方法调用异常，需要修改nativeio这个java文件。
+		使用TableMapReduceUtil的时候如果出现异常：*****/htrace-core-2.04.jar from hdfs://***/htrace-core-2.04.jar is not a valid DFS filename. 就需要将addDependencyJars参数设置为false。
+	本地提交job，集群运行测试：
+		本地需要知道提交的job是需要提交到集群上的，所以需要指定两个参数mapreduce.framework.name和yarn.resourcemanager.address，value分别为yarn和hh:8032即可，但是可能会出现异常信息，此时需要将参数mapreduce.app-submission.cross-platform设置为true。
+		参数设置：
+			mapreduce.framework.name=yarn
+			yarn.resourcemanager.address=hh:8032
+			mapreduce.app-submission.cross-platform=true
+		异常：
+			1. Permission denied: user=gerry, access=EXECUTE, inode="/tmp":hadoop:supergroup:drwx------
+				解决方案：执行hdfs dfs -chmod -R 777 /tmp
+			2. Stack trace: ExitCodeException exitCode=1: /bin/bash: line 0: fg: no job control
+				解决方案：添加mapreduce.app-submission.cross-platform=true
+			3. ExitCodeException exitCode=1:
+				解决方案：habse指定输出reducer的时候必须给定addDependencyJars参数为true。
+			4. Class com.beifeng.etl.mr.ald.AnalyserLogDataMapper not found
+				解决方案：引入EJob.java文件，然后再runner类中添加代码
+					File jarFile = EJob.createTempJar("target/classes");
+					((JobConf) job.getConfiguration()).setJar(jarFile.toString());
+	集群提交&运行job测试：
